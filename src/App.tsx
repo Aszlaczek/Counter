@@ -20,7 +20,7 @@ function App() {
     <form onSubmit={submit}>
       <label htmlFor="inp">
         <p>Napisz wartość godzin w minutach</p>
-        <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} />
+        <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
       </label>
       <p>Wartość przeliczona</p>
       <h1>{count}</h1>
