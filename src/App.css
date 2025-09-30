@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#inp {
+  font-size: clamp(.75rem, 10svw, 1.5rem);
+  text-align: center;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+}
+
+p {
+  font-size: clamp(.75rem, 10svw, 1.5rem);
+}
