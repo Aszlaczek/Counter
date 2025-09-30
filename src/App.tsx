@@ -20,11 +20,13 @@ function App() {
     <form onSubmit={submit}>
       <label htmlFor="inp">
         <p>Napisz wartość godzin w minutach</p>
-        <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
+        <div className="container">
+          <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
+          <button type='submit'>Licz</button>
+        </div>
       </label>
       <p>Wartość przeliczona</p>
       <h1>{count}</h1>
-      <button type='submit'>Licz</button>
     </form>
   )
 }

@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+
+label {
+  &>.container {
+    display: grid;
+    grid-template-columns: 80% 1fr;
+    gap: .2rem;
+  }
+
+}
+
 #inp {
   font-size: clamp(.75rem, 10svw, 1.5rem);
   text-align: center;
@@ -16,6 +26,7 @@
     appearance: none;
     margin: 0;
   }
+
 }
 
 p {
