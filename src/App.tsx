@@ -23,8 +23,8 @@ function App() {
         <div className="container">
           <div className="box">
             <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
+            <button type='submit'>Licz</button>
           </div>
-          <button type='submit'>Licz</button>
         </div>
       </label>
       <p>Wartość przeliczona</p>
