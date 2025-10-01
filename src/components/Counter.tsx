@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from 'react'
+import '../style/Counter.css'
+const Counter = () => {
+
+    const [value, setValue] = useState(0)
+    const [count, setCount] = useState({ hour: 0, min: 0 })
+
+    useEffect(() => {
+
+        const len = String(value)
+        if (len.length >= 5) {
+            alert("Za duzo znaków :P")
+            setValue(0)
+            setCount({ hour: 0, min: 0 })
+            return
+        }
+        else {
+            const hour = Math.floor(value / 60)
+            let min = value - hour * 60
+
+            setCount({ hour: hour, min: min })
+        }
+    }, [value])
+
+
+    return (
+        <div className='container-outer'>
+            <div className='container-inner'>
+                <p>Napisz wartość godzin w minutach</p>
+                <div className="container">
+                    <div className="box">
+                        <input type="number" name="inp" id="inp" onChange={e => setValue(Number(e.target.value))} min={0} inputMode='numeric' max={1000} placeholder='0' value={value === 0 ? '' : value} />
+                        <h2>{`${count.hour}h : ${count.min < 10 ? '0' + count.min : count.min}min`}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Counter

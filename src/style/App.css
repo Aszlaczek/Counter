@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  font-size: clamp(.75rem, 10svw, 1.5rem);
+  overflow: hidden;
+}
+
+.container-main {
+  display: grid;
+  height: calc(100svh - 4rem);
+  grid-template-rows: 1fr 1fr;
+  width: calc(100svw - 4rem);
+}

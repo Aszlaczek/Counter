@@ -1,35 +1,12 @@
-import { useState, type FormEvent } from 'react'
-import './App.css'
+import './style/App.css'
+import Counter from './components/Counter'
 
 function App() {
-  const [value, setValue] = useState('')
-  const [count, setCount] = useState('0h : 0min')
-
-  const submit = (e: FormEvent<HTMLElement>) => {
-    e.preventDefault()
-
-    const hour = Math.floor(Number(value) / 60)
-    let min: number | string = Number(value) - hour * 60
-    min = min < 10 ? `0${min}` : min
-
-
-    setCount(`${hour}h : ${min}min`)
-  }
-
   return (
-    <form onSubmit={submit}>
-      <label htmlFor="inp">
-        <p>Napisz wartość godzin w minutach</p>
-        <div className="container">
-          <div className="box">
-            <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
-            <button type='submit'>Licz</button>
-          </div>
-        </div>
-      </label>
-      <p>Wartość przeliczona</p>
-      <h1>{count}</h1>
-    </form>
+    <div className='container-main'>
+      <Counter />
+
+    </div>
   )
 }
 
