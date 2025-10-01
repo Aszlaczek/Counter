@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   const [value, setValue] = useState('')
-  const [count, setCount] = useState('')
+  const [count, setCount] = useState('0h : 0min')
 
   const submit = (e: FormEvent<HTMLElement>) => {
     e.preventDefault()
@@ -13,7 +13,7 @@ function App() {
     min = min < 10 ? `0${min}` : min
 
 
-    setCount(`${hour}h: ${min}min`)
+    setCount(`${hour}h : ${min}min`)
   }
 
   return (

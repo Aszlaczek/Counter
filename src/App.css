@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-size: clamp(.75rem, 10svw, 1.5rem);
 }
 
 
@@ -10,14 +11,15 @@ label {
   &>.container {
     display: grid;
     grid-template-columns: 80% 1fr;
-    gap: .2rem;
+    gap: .5rem;
   }
-
 }
 
 #inp {
-  font-size: clamp(.75rem, 10svw, 1.5rem);
   text-align: center;
+  font-size: inherit;
+  width: 50%;
+  place-self: center;
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -30,5 +32,5 @@ label {
 }
 
 p {
-  font-size: clamp(.75rem, 10svw, 1.5rem);
+  font-size: inherit;
 }
