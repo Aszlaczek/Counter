@@ -21,7 +21,9 @@ function App() {
       <label htmlFor="inp">
         <p>Napisz wartość godzin w minutach</p>
         <div className="container">
-          <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
+          <div className="box">
+            <input type="number" name="inp" id="inp" onChange={e => setValue(e.target.value)} min={0} inputMode='numeric' />
+          </div>
           <button type='submit'>Licz</button>
         </div>
       </label>
