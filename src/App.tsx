@@ -2,6 +2,7 @@ import './style/App.css'
 import Counter from './components/Counter'
 import { useState } from 'react'
 import Form from './components/Form'
+import Table from './components/Table'
 
 function App() {
   const [data, setData] = useState({ name: '', surname: '', hours: '' })
@@ -18,7 +19,7 @@ function App() {
       {
         showForm ? <Form user={data} /> : ''
       }
-
+      <Table />
 
     </div>
   )

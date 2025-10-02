@@ -1,20 +1,30 @@
-import React from 'react'
+
 
 const Table = () => {
+
+    // const showUsers = () => {
+
+    // }
+
+
     return (
         <table>
-            <tbody>
-                <thead>
-                    <tr>
+            <thead>
+                <tr>
+                    <th>
                         <p>Imię</p>
-                    </tr>
-                    <tr>
+                    </th>
+                    <th>
                         <p>Nazwisko</p>
-                    </tr>
-                    <tr>
+                    </th>
+                    <th>
                         <p>Godziny</p>
-                    </tr>
-                </thead>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {/* {showUsers} */}
             </tbody>
         </table>
     )
