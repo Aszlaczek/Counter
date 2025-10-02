@@ -27,12 +27,10 @@ const Counter = () => {
         <div className='container-outer'>
             <div className='container-inner'>
                 <p>Napisz wartość godzin w minutach</p>
-                <div className="container">
-                    <div className="box">
-                        <input type="number" name="inp" id="inp" onChange={e => setValue(Number(e.target.value))} min={0} inputMode='numeric' max={1000} placeholder='0' value={value === 0 ? '' : value} />
-                        <h2>{`${count.hour}h : ${count.min < 10 ? '0' + count.min : count.min}min`}</h2>
-                    </div>
+                <div className="box">
+                    <input type="number" name="inp" id="inp" onChange={e => setValue(Number(e.target.value))} min={0} inputMode='numeric' max={1000} placeholder='0' value={value === 0 ? '' : value} />
                 </div>
+                <h1>{`${count.hour > 10 ? count.hour : '' + count.hour}h:${count.min < 10 ? '0' + count.min : count.min}min`}</h1>
             </div>
         </div>
     )
