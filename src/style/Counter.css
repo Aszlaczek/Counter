@@ -57,6 +57,7 @@
             background-color: transparent;
             font-size: var(--font-size-500);
             text-align: end;
+            z-index: 100;
 
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button {
