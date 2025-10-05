@@ -20,8 +20,7 @@ const Form = (props: { user: User }) => {
         // Get data from Form
         const data = new FormData(e.currentTarget)
         const [name, surname] = [data.get('name'), data.get('surname')]
-
-        // const user: User = { name: name as string, surname: surname as string, hours: hours }
+        const user: User = { name: name as string, surname: surname as string, hours: hours }
 
         setTimeout(() => {
             console.log(name, surname, hours)
