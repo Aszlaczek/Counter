@@ -3,13 +3,10 @@ import Counter from './components/Counter'
 import { useState } from 'react'
 import Form from './components/Form'
 import Table from './components/Table'
-import type { User } from './type'
 
-function App() {
+export default function App() {
   const [data, setData] = useState({ name: '', surname: '', hours: '' })
   const [showForm, setShowLabel] = useState(true)
-  const [users, setUsers] = useState<User[]>([])
-
 
   const handleHours = (e: string) => {
     setData({ ...data, hours: e })
@@ -28,4 +25,3 @@ function App() {
   )
 }
 
-export default App
