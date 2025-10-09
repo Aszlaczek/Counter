@@ -4,7 +4,7 @@ import type { User } from "./type";
 type UserStoreSchema = {
     user: User,
     editUser: (option: string, state: string) => void,
-    removeInfo: () => void
+    removeInfo: () => void,
 }
 
 export const useUserStore = create<UserStoreSchema>((set, get) => ({
@@ -39,11 +39,15 @@ export const useHoursStore = create<HoursStoreSchema>((set, get) => ({
 type UserListSchema = {
     list: User[],
     addToList: (user: User) => void,
+    removeUser: (id: number) => void,
+    getSpecificUser: (id: number) => void
 }
 
 export const useUserListStore = create<UserListSchema>((set, get) => ({
     list: [],
-    addToList: (user) => set({ list: [...get().list, user] })
+    addToList: (user) => set({ list: [user, ...get().list,] }),
+    removeUser: (id) => set({ list: [...get().list.filter((_, i) => id !== i)] }),
+    getSpecificUser: (id) => get().list[id]
 }))
 
 type StateSchema = {
@@ -52,7 +56,7 @@ type StateSchema = {
     setStateTrue: () => void
 }
 
-export const useSateStore = create<StateSchema>((set, get) => ({
+export const useStateStore = create<StateSchema>((set) => ({
     isDone: true,
     setStateFalse: () => set({ isDone: false }),
     setStateTrue: () => set({ isDone: true })

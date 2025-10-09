@@ -4,7 +4,3 @@ export type User = {
     hours: string,
     date: string
 }
-
-export type storeUser = {
-
-}
