@@ -5,16 +5,12 @@ import Form from './components/Form'
 import Table from './components/Table'
 
 export default function App() {
-  const [data, setData] = useState({ name: '', surname: '', hours: '' })
+  const [data, setData] = useState({ name: '', surname: '', hours: '', date: Date() })
   const [showForm, setShowLabel] = useState(true)
-
-  const handleHours = (e: string) => {
-    setData({ ...data, hours: e })
-  }
 
   return (
     <div className='container-main'>
-      <Counter handleHours={handleHours} />
+      <Counter />
       <button type='button' onClick={() => setShowLabel(!showForm)}>{showForm ? 'Zamknij formularz' : 'Pokaż formularz'}</button>
       {
         showForm ? <Form user={data} /> : ''
