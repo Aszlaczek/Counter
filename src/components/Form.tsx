@@ -49,7 +49,7 @@ const Form = () => {
             <label htmlFor="hours">
                 <input type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
             </label>
-            <button type='submit'>{isDone ? 'Zapisz' : 'Czekaj...'}</button>
+            <button type='submit' disabled={!isDone}>{isDone ? 'Zapisz' : 'Czekaj...'}</button>
         </form>
     )
 }
