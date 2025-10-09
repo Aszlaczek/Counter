@@ -1,19 +1,19 @@
 import { create } from "zustand";
 import type { User } from "./type";
 
-type UserStore = {
+type UserStoreSchema = {
     user: User,
-    addUser: Function,
-    editUser: Function
+    editUser: (option: string, state: string) => void,
+    removeInfo: () => void
 }
 
-export const useUserStore = create<UserStore>((createState) => ({
+export const useUserStore = create<UserStoreSchema>((set, get) => ({
     user: { name: '', surname: '', hours: '', date: '' },
-    addUser: (state: User) => ({ user: state }),
-    editUser: (option: string, state: string) => ({ user: { ...createState, [option]: state } }),
+    editUser: (option, state) => set({ user: { ...get().user, [option]: state } }),
+    removeInfo: () => set({ user: { name: '', surname: '', hours: '', date: '' } })
 }))
 
-type HoursStore = {
+type HoursStoreSchema = {
     min: number,
     hours: number,
     allHours: string,
@@ -21,7 +21,7 @@ type HoursStore = {
     convert: () => void
 }
 
-export const useHoursStore = create<HoursStore>((set, get) => ({
+export const useHoursStore = create<HoursStoreSchema>((set, get) => ({
     min: 0,
     hours: 0,
     setMin: (minutes: number) =>
@@ -34,5 +34,26 @@ export const useHoursStore = create<HoursStore>((set, get) => ({
         set({ hours, allHours })
     },
     allHours: '',
+}))
 
+type UserListSchema = {
+    list: User[],
+    addToList: (user: User) => void,
+}
+
+export const useUserListStore = create<UserListSchema>((set, get) => ({
+    list: [],
+    addToList: (user) => set({ list: [...get().list, user] })
+}))
+
+type StateSchema = {
+    isDone: boolean,
+    setStateFalse: () => void,
+    setStateTrue: () => void
+}
+
+export const useSateStore = create<StateSchema>((set, get) => ({
+    isDone: true,
+    setStateFalse: () => set({ isDone: false }),
+    setStateTrue: () => set({ isDone: true })
 }))

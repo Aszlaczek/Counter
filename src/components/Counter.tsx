@@ -7,7 +7,6 @@ const Counter = () => {
 
     useEffect(() => {
         const len = String(count.min)
-        console.log(len)
         if (len.length >= 5) {
             alert("Za duzo znaków :P")
             count.setMin(0)
