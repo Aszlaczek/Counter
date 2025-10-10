@@ -45,7 +45,7 @@ type UserListSchema = {
 
 export const useUserListStore = create<UserListSchema>((set, get) => ({
     list: [],
-    addToList: (user) => set({ list: [user, ...get().list,] }),
+    addToList: (user) => set({ list: [...get().list, user] }),
     removeUser: (id) => set({ list: [...get().list.filter((_, i) => id !== i)] }),
     getSpecificUser: (id) => get().list[id]
 }))

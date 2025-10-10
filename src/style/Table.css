@@ -1,0 +1,25 @@
+@import './variable.css';
+
+table {
+    width: 100%;
+    font-size: inherit;
+    background-color: var(--color-background);
+
+    border-radius: .5rem;
+    padding: var(--padding-400);
+}
+
+
+td {
+    place-items: center;
+    margin: .25rem;
+
+    button {
+        font-size: var(--font-size-em-400);
+    }
+
+    &:last-child {
+        display: grid;
+        gap: .25rem;
+    }
+}

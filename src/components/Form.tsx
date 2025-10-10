@@ -1,6 +1,7 @@
 import { useEffect, type FormEvent } from 'react'
 import type { User } from '../type'
 import { useHoursStore, useStateStore, useUserListStore, useUserStore } from '../store'
+import '../style/Form.css';
 
 const Form = () => {
 
@@ -39,7 +40,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={saveUser}>
+        <form onSubmit={saveUser} className='form-create'>
             <label htmlFor="name">
                 <input type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
             </label>

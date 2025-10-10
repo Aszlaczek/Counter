@@ -7,18 +7,25 @@
     /* Ratio for calculation  */
     --golden-ratio: 1.618;
 
-    /* Font sizes */
-    --font-size-700: calc(var(--font-size-600) * var(--golden-ratio));
-    --font-size-600: calc(var(--font-size-500) * var(--golden-ratio));
-    --font-size-500: 1.25rem;
-    --font-size-400: calc(var(--font-size-500) / var(--golden-ratio));
-    --font-size-300: calc(var(--font-size-400) / var(--golden-ratio));
+    /* Font sizes rem*/
+    --font-size-rem-700: calc(var(--font-size-rem-600) * var(--golden-ratio));
+    --font-size-rem-600: calc(var(--font-size-rem-500) * var(--golden-ratio));
+    --font-size-rem-500: 1.25rem;
+    --font-size-rem-400: calc(var(--font-size-rem-500) / var(--golden-ratio));
+    --font-size-rem-300: calc(var(--font-size-rem-400) / var(--golden-ratio));
+
+    /* Font sizes em*/
+    --font-size-em-700: calc(var(--font-size-em-600) * var(--golden-ratio));
+    --font-size-em-600: calc(var(--font-size-em-500) * var(--golden-ratio));
+    --font-size-em-500: 1.25em;
+    --font-size-em-400: calc(var(--font-size-em-500) / var(--golden-ratio));
+    --font-size-em-300: calc(var(--font-size-em-400) / var(--golden-ratio));
 
     /* Colors */
     --color-primary: #143af7;
-    --color-secondary: #221111;
+    --color-secondary: #226666;
     --color-info: #d1f426;
-    --color-background: #00FF00;
+    --color-background: #000000;
 
     /* Padding sizes */
     --padding-700: calc(var(--padding-500) * var(--golden-ratio));
@@ -26,4 +33,9 @@
     --padding-500: .75rem;
     --padding-400: calc(var(--padding-500) / var(--golden-ratio));
     --padding-300: calc(var(--padding-400) / var(--golden-ratio));
+
+    /* Time for transition */
+    --time-3: 2s;
+    --time-2: 1.25s;
+    --time-1: .5s;
 }

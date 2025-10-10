@@ -22,7 +22,6 @@
         --time: .5s;
         width: 100%;
         display: flex;
-        border-radius: 10px;
         padding: var(--padding-300);
         place-content: center;
         padding-right: var(--padding);
@@ -35,7 +34,7 @@
             place-content: center;
             height: 100%;
             top: 0;
-            right: 0;
+            right: 4px;
             color: var(--color);
             opacity: 1;
             transition: opacity, scale var(--time);
@@ -53,9 +52,8 @@
         #inp {
             width: 100%;
             border: none;
-            outline: none;
             background-color: transparent;
-            font-size: var(--font-size-500);
+            font-size: var(--font-size-rem-500);
             text-align: end;
             z-index: 100;
 
