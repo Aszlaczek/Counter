@@ -1,0 +1,41 @@
+:root {
+    /* Font family */
+    --font-family: "Open Sans", sans-serif;
+    --font-weight: 400;
+    --font-style: italic;
+
+    /* Ratio for calculation  */
+    --golden-ratio: 1.618;
+
+    /* Font sizes rem*/
+    --font-size-rem-700: calc(var(--font-size-rem-600) * var(--golden-ratio));
+    --font-size-rem-600: calc(var(--font-size-rem-500) * var(--golden-ratio));
+    --font-size-rem-500: 1.25rem;
+    --font-size-rem-400: calc(var(--font-size-rem-500) / var(--golden-ratio));
+    --font-size-rem-300: calc(var(--font-size-rem-400) / var(--golden-ratio));
+
+    /* Font sizes em*/
+    --font-size-em-700: calc(var(--font-size-em-600) * var(--golden-ratio));
+    --font-size-em-600: calc(var(--font-size-em-500) * var(--golden-ratio));
+    --font-size-em-500: 1.25em;
+    --font-size-em-400: calc(var(--font-size-em-500) / var(--golden-ratio));
+    --font-size-em-300: calc(var(--font-size-em-400) / var(--golden-ratio));
+
+    /* Colors */
+    --color-primary: #143af7;
+    --color-secondary: #226666;
+    --color-info: #d1f426;
+    --color-background: #000000;
+
+    /* Padding sizes */
+    --padding-700: calc(var(--padding-500) * var(--golden-ratio));
+    --padding-600: calc(var(--padding-500) * var(--golden-ratio));
+    --padding-500: .75rem;
+    --padding-400: calc(var(--padding-500) / var(--golden-ratio));
+    --padding-300: calc(var(--padding-400) / var(--golden-ratio));
+
+    /* Time for transition */
+    --time-3: 2s;
+    --time-2: 1.25s;
+    --time-1: .5s;
+}

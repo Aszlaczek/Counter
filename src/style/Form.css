@@ -1,0 +1,29 @@
+@import './variable.css';
+
+.form-create {
+    --gap: .5em;
+    /* background-color: red; */
+    display: grid;
+    padding: var(--padding-700);
+    gap: var(--gap);
+    place-items: center;
+
+    label {
+        --time: .5s;
+        display: grid;
+        place-items: center;
+        width: clamp(2em, 12em, 650px);
+        transition: all var(--time);
+
+        input {
+            padding: var(--padding-500);
+            width: 100%;
+        }
+    }
+
+    button {
+        width: auto;
+        font-size: var(--font-size-rem-500);
+    }
+
+}
