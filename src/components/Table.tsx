@@ -1,18 +1,10 @@
 import { useUserListStore } from "../store"
-// import EditForm from "./EditForm"
 import '../style/Table.css';
 
 
 const Table = () => {
 
     const { list, removeUser } = useUserListStore()
-    // const { setStateFalse } = useStateStore()
-
-    // const editUser = (id: number) => {
-    //     setStateFalse()
-    //     console.log(list[id])
-    //     return <EditForm data={list[id]} />
-    // }
 
     return (
         <table>
