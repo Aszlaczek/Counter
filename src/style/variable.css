@@ -7,19 +7,18 @@
     /* Ratio for calculation  */
     --golden-ratio: 1.618;
 
-    /* Font sizes rem*/
-    --font-size-rem-700: calc(var(--font-size-rem-600) * var(--golden-ratio));
-    --font-size-rem-600: calc(var(--font-size-rem-500) * var(--golden-ratio));
-    --font-size-rem-500: 1.25rem;
-    --font-size-rem-400: calc(var(--font-size-rem-500) / var(--golden-ratio));
-    --font-size-rem-300: calc(var(--font-size-rem-400) / var(--golden-ratio));
+    /* Font sizes*/
 
-    /* Font sizes em*/
-    --font-size-em-700: calc(var(--font-size-em-600) * var(--golden-ratio));
-    --font-size-em-600: calc(var(--font-size-em-500) * var(--golden-ratio));
-    --font-size-em-500: 1.25em;
-    --font-size-em-400: calc(var(--font-size-em-500) / var(--golden-ratio));
-    --font-size-em-300: calc(var(--font-size-em-400) / var(--golden-ratio));
+    --font-size-h1: 2.986rem;
+    --font-size-h2: 2.488rem;
+    --font-size-h3: 2.074rem;
+    --font-size-800: 1.728rem;
+    --font-size-700: 1.44rem;
+    --font-size-600: 1.2rem;
+    --font-size-500: 1rem;
+    --font-size-400: 0.833rem;
+    --font-size-300: 0.694rem;
+
 
     /* Colors */
     --color-primary: #143af7;

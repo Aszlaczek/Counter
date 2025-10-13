@@ -1,10 +1,22 @@
-import { useUserListStore } from "../store"
+import { usePopUpStore, useUserListStore, useUserStore } from "../store"
 import '../style/Table.css';
 
 
 const Table = () => {
 
-    const { list, removeUser } = useUserListStore()
+    const { list, removeUser, getSpecificUser } = useUserListStore()
+    const { show, visible } = usePopUpStore()
+    const { setUser } = useUserStore()
+
+    const getUserHandler = (id: number) => {
+        show()
+        const user = getSpecificUser(id)
+        if (user) {
+            setUser(user)
+            return
+        }
+        alert(`No user have id: ${id}`)
+    }
 
     return (
         <table>
@@ -33,8 +45,8 @@ const Table = () => {
                             <td><p>{e.surname}</p></td>
                             <td><p>{e.hours}</p></td>
                             <td>
-                                {/* <button className="btn" onClick={() => editUser(i)}>Edytuj</button> */}
-                                <button className="btn" onClick={() => removeUser(i)}>Usuń</button>
+                                <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>Edytuj</button>
+                                <button className="btn" disabled={visible} onClick={() => removeUser(i)}>Usuń</button>
                             </td>
 
                         </tr>

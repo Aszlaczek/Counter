@@ -5,12 +5,14 @@ type UserStoreSchema = {
     user: User,
     editUser: (option: string, state: string) => void,
     removeInfo: () => void,
+    setUser: (user: User) => void
 }
 
 export const useUserStore = create<UserStoreSchema>((set, get) => ({
-    user: { name: '', surname: '', hours: '', date: '' },
+    user: { id: null, name: '', surname: '', hours: '', date: '' },
     editUser: (option, state) => set({ user: { ...get().user, [option]: state } }),
-    removeInfo: () => set({ user: { name: '', surname: '', hours: '', date: '' } })
+    removeInfo: () => set({ user: { id: null, name: '', surname: '', hours: '', date: '' } }),
+    setUser: (user) => set({ user: user })
 }))
 
 type HoursStoreSchema = {
@@ -40,14 +42,16 @@ type UserListSchema = {
     list: User[],
     addToList: (user: User) => void,
     removeUser: (id: number) => void,
-    getSpecificUser: (id: number) => void
+    getSpecificUser: (id: number) => User | undefined,
+    setSpecificUser: (id: number, user: User) => void
 }
 
 export const useUserListStore = create<UserListSchema>((set, get) => ({
     list: [],
     addToList: (user) => set({ list: [...get().list, user] }),
     removeUser: (id) => set({ list: [...get().list.filter((_, i) => id !== i)] }),
-    getSpecificUser: (id) => get().list[id]
+    getSpecificUser: (id) => { return get().list.at(id) },
+    setSpecificUser: (id, user) => set({ list: get().list.map(e => e.id === id ? e = user : e) })
 }))
 
 type StateSchema = {
@@ -60,4 +64,17 @@ export const useStateStore = create<StateSchema>((set) => ({
     isDone: true,
     setStateFalse: () => set({ isDone: false }),
     setStateTrue: () => set({ isDone: true })
+}))
+
+type EditFormSchema = {
+    visible: boolean,
+    show: () => void,
+    hide: () => void
+}
+
+export const usePopUpStore = create<EditFormSchema>((set) => ({
+    visible: false,
+    show: () => { set({ visible: true }) },
+    hide: () => set({ visible: false })
+
 }))

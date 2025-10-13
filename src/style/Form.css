@@ -7,6 +7,11 @@
     padding: var(--padding-700);
     gap: var(--gap);
     place-items: center;
+    font-size: var(--font-size-500);
+
+    * {
+        font-size: inherit;
+    }
 
     label {
         --time: .5s;
@@ -23,7 +28,7 @@
 
     button {
         width: auto;
-        font-size: var(--font-size-rem-500);
+
     }
 
 }

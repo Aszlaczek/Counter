@@ -21,11 +21,11 @@ const Counter = () => {
     return (
         <div className='container-outer'>
             <div className='container-inner'>
-                <p>Napisz wartość godzin w minutach</p>
+                <h1>Napisz wartość godzin w minutach</h1>
                 <div className="box">
                     <input type="number" name="inp" id="inp" onChange={e => { count.setMin(Number(e.target.value)) }} min={0} inputMode='numeric' max={1000} placeholder='0' value={count.min === 0 ? '' : count.min} />
                 </div>
-                <h1>{count.allHours}</h1>
+                <h2>{count.allHours}</h2>
             </div>
         </div>
     )

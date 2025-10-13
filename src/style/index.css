@@ -7,35 +7,56 @@
   max-height: 100svh;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 * {
   font-family: var(--font-family);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: clamp(var(--font-size-rem-300), 8svw, var(--font-size-rem-500));
+  font-size: var(--font-size-500);
 }
 
 h1 {
-  font-size: clamp(var(--font-size-rem-300), 8svw, var(--font-size-rem-600));
+  font-size: clamp(var(--font-size-500), 8svw, var(--font-size-h1));
+}
+
+h2 {
+  font-size: clamp(var(--font-size-400), 5svw, var(--font-size-h2));
 }
 
 button {
   padding: var(--padding-300) var(--padding-500);
   border-radius: 12px;
   border: none;
-  cursor: pointer;
   background-color: transparent;
   border-block: 2px solid var(--color-secondary);
   transition: all var(--time-1);
+  color: inherit;
   outline: none;
+  cursor: pointer;
 
-  &:hover,
-  &:focus,
-  &:focus-visible {
-    border-color: var(--color-primary);
-    scale: 1.02;
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
   }
+}
 
+@media (min-width: 750px) {
+
+  button {
+    &:not(:disabled) {
+
+      &:focus,
+      &:focus-visible,
+      &:hover {
+        border-color: var(--color-primary);
+        scale: 1.02;
+      }
+    }
+  }
 }
 
 label,

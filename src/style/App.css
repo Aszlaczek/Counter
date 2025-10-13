@@ -3,3 +3,7 @@
 .container-main {
     padding-inline: var(--padding-500);
 }
+
+.hide {
+    opacity: .5;
+}

@@ -8,7 +8,7 @@ const Form = () => {
     const { user, editUser, removeInfo } = useUserStore()
     const { isDone, setStateFalse, setStateTrue } = useStateStore()
     const { allHours, setMin } = useHoursStore()
-    const { addToList } = useUserListStore()
+    const { addToList, list } = useUserListStore()
 
     useEffect(() => {
         editUser('hours', allHours)
@@ -24,7 +24,7 @@ const Form = () => {
         // Get data from Form
         const data = new FormData(e.currentTarget)
         const [name, surname, hours] = [data.get('name'), data.get('surname'), data.get('hours')]
-        const user: User = { name: name as string, surname: surname as string, hours: hours as string, date: Date().split(' ').slice(0, 5).join(' ') }
+        const user: User = { id: list.length, name: name as string, surname: surname as string, hours: hours as string, date: Date().split(' ').slice(0, 5).join(' ') }
 
         console.log(hours)
 
