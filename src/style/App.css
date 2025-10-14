@@ -1,9 +1,30 @@
 @import './variable.css';
 
 .container-main {
-    padding-inline: var(--padding-500);
+    padding-inline: clamp(0, 2svw, var(--padding-500));
+    display: grid;
+    grid-template-rows: min-content min-content 0fr min-content;
+    gap: var(--padding-500);
+    transition: all var(--time-1);
+    place-items: center;
+    font-size: clamp(var(--font-size-500), 5svw, var(--font-size-700));
+
+    .btn-open-form {
+        width: fit-content;
+        place-self: start;
+    }
+
+    *:not(h1, h2, h3) {
+        font-size: inherit;
+    }
+
+
 }
 
 .hide {
-    opacity: .5;
+    opacity: .25;
+}
+
+.container-outer {
+    width: 100%;
 }

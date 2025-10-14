@@ -14,9 +14,9 @@ export default function App() {
       {visible ? <EditForm /> : ''}
       <div className={`container-main ${visible ? 'hide' : ''}`}>
         <Counter />
-        <button type='button' onClick={() => setShowLabel(!showForm)} disabled={visible}>{showForm ? 'Zamknij formularz' : 'Pokaż formularz'}</button>
+        <button type='button' className='btn-open-form' onClick={() => setShowLabel(!showForm)} disabled={visible}>{showForm ? 'Zamknij formularz' : 'Pokaż formularz'}</button>
         {
-          showForm && !visible ? <Form /> : ''
+          showForm ? <Form /> : ''
         }
         <Table />
       </div>

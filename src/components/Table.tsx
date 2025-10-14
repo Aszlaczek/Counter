@@ -23,16 +23,16 @@ const Table = () => {
             <thead>
                 <tr>
                     <th>
-                        <p>L.P.</p>
+                        <h3>L.P.</h3>
                     </th>
                     <th>
-                        <p>Imię</p>
+                        <h3>Imię</h3>
                     </th>
                     <th>
-                        <p>Nazwisko</p>
+                        <h3>Nazwisko</h3>
                     </th>
                     <th>
-                        <p>Godziny</p>
+                        <h3>Godziny</h3>
                     </th>
                 </tr>
             </thead>

@@ -7,6 +7,12 @@
   max-height: 100svh;
 }
 
+#root {
+  position: relative;
+  width: 100svw;
+  overflow-x: hidden;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -16,15 +22,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: var(--font-size-500);
 }
 
 h1 {
-  font-size: clamp(var(--font-size-500), 8svw, var(--font-size-h1));
+  font-size: clamp(var(--font-size-700), 10svw, var(--font-size-h1));
 }
 
 h2 {
-  font-size: clamp(var(--font-size-400), 5svw, var(--font-size-h2));
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-700);
 }
 
 button {
@@ -37,6 +46,7 @@ button {
   color: inherit;
   outline: none;
   cursor: pointer;
+  font-size: var(--font-size-adaptive);
 
   &:disabled {
     opacity: .5;
@@ -44,20 +54,6 @@ button {
   }
 }
 
-@media (min-width: 750px) {
-
-  button {
-    &:not(:disabled) {
-
-      &:focus,
-      &:focus-visible,
-      &:hover {
-        border-color: var(--color-primary);
-        scale: 1.02;
-      }
-    }
-  }
-}
 
 label,
 .box {
@@ -78,5 +74,28 @@ input {
   padding: var(--padding-300);
   border: none;
   outline: none;
+  font-size: var(--font-size-adaptive);
   background-color: transparent;
+}
+
+@media (max-width: 650px) {
+
+  form {
+    width: 80%;
+  }
+}
+
+@media (min-width: 750px) {
+
+  button {
+    &:not(:disabled) {
+
+      &:focus,
+      &:focus-visible,
+      &:hover {
+        border-color: var(--color-primary);
+        scale: 1.02;
+      }
+    }
+  }
 }

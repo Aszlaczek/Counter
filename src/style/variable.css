@@ -8,7 +8,6 @@
     --golden-ratio: 1.618;
 
     /* Font sizes*/
-
     --font-size-h1: 2.986rem;
     --font-size-h2: 2.488rem;
     --font-size-h3: 2.074rem;
@@ -19,6 +18,9 @@
     --font-size-400: 0.833rem;
     --font-size-300: 0.694rem;
 
+    /* Adaptive font size */
+
+    --font-size-adaptive: clamp(var(--font-size-500), 5svw, var(--font-size-700));
 
     /* Colors */
     --color-primary: #143af7;

@@ -1,6 +1,6 @@
 import { useEffect, type FormEvent } from 'react'
 import type { User } from '../type'
-import { useHoursStore, useStateStore, useUserListStore, useUserStore } from '../store'
+import { useHoursStore, usePopUpStore, useStateStore, useUserListStore, useUserStore } from '../store'
 import '../style/Form.css';
 
 const Form = () => {
@@ -9,6 +9,7 @@ const Form = () => {
     const { isDone, setStateFalse, setStateTrue } = useStateStore()
     const { allHours, setMin } = useHoursStore()
     const { addToList, list } = useUserListStore()
+    const { visible } = usePopUpStore()
 
     useEffect(() => {
         editUser('hours', allHours)
@@ -40,15 +41,15 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={saveUser} className='form-create'>
-            <label htmlFor="name">
-                <input type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
+        <form onSubmit={saveUser} className={'form-create'}>
+            <label style={{ '--item': 1 }} htmlFor="name">
+                <input className={`${visible ? 'hide' : ''}`} type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
             </label>
-            <label htmlFor="surname">
-                <input type="text" name="surname" id="surname" placeholder='Nazwisko' required value={user.surname} onChange={e => editUser('surname', e.target.value)} />
+            <label style={{ '--item': 2 }} htmlFor="surname">
+                <input className={`${visible ? 'hide' : ''}`} type="text" name="surname" id="surname" placeholder='Nazwisko' required value={user.surname} onChange={e => editUser('surname', e.target.value)} />
             </label>
-            <label htmlFor="hours">
-                <input type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
+            <label style={{ '--item': 3 }} htmlFor="hours">
+                <input className={`${visible ? 'hide' : ''}`} type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
             </label>
             <button type='submit' disabled={!isDone}>{isDone ? 'Zapisz' : 'Czekaj...'}</button>
         </form>

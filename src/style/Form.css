@@ -1,13 +1,27 @@
 @import './variable.css';
 
+@keyframes showForm {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes showLabel {
+    to {
+        opacity: 1;
+        width: clamp(2em, 100%, 400px);
+    }
+}
+
 .form-create {
     --gap: .5em;
-    /* background-color: red; */
     display: grid;
     padding: var(--padding-700);
     gap: var(--gap);
     place-items: center;
-    font-size: var(--font-size-500);
+    animation: showForm var(--time-1);
+    transition: all var(--time-1);
 
     * {
         font-size: inherit;
@@ -17,8 +31,9 @@
         --time: .5s;
         display: grid;
         place-items: center;
-        width: clamp(2em, 12em, 650px);
+        width: 0;
         transition: all var(--time);
+        animation: showLabel var(--time-1) calc(var(--item)*.2s) forwards;
 
         input {
             padding: var(--padding-500);
@@ -28,7 +43,6 @@
 
     button {
         width: auto;
-
     }
 
 }

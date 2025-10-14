@@ -1,6 +1,7 @@
 import { type ChangeEvent, type FormEvent } from 'react'
 import type { User } from '../type'
 import { usePopUpStore, useUserListStore, useUserStore } from '../store'
+import '../style/EditForm.css'
 
 const EditForm = () => {
 
@@ -32,8 +33,13 @@ const EditForm = () => {
         editUser(name, value)
     }
 
+    const handleHide = () => {
+        hide()
+        removeInfo()
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form-edit'>
             <h2>Edytuj</h2>
             <label htmlFor="e-name">
                 <p>Imię</p>
@@ -48,7 +54,7 @@ const EditForm = () => {
                 <input type="text" name="e-hours" required id="e-hours" value={user.hours} onChange={e => setChange(e)} />
             </label>
             <div className="container-btn">
-                <button type="button" onClick={hide}>Cofnij</button>
+                <button type="button" onClick={handleHide}>Cofnij</button>
                 <button type="submit">Zapisz</button>
             </div>
         </form>

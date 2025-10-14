@@ -3,20 +3,26 @@
 table {
     --border-radius: .5rem;
     width: 100%;
-    font-size: inherit;
     background-color: var(--color-background);
-    font-size: var(--font-size-400);
     border-radius: var(--border-radius);
-    padding: var(--padding-400);
     text-align: center;
+    width: min-content;
+}
 
-    * {
-        font-size: inherit;
+thead {
+    width: min-content;
+
+    h3 {
+        width: auto;
+        border-right: 1px solid transparent;
+        font-size: var(--font-size-adaptive);
+        border-bottom: 5px solid var(--color-secondary);
     }
 }
 
 tr {
     place-items: center;
+    width: min-content;
 
     &:nth-child(even) {
         background-color: rgb(from var(--color-background) 52 52 52);
@@ -25,15 +31,31 @@ tr {
 
 
 td {
+    width: min-content;
     place-items: center;
     margin: .25rem;
+    border-right: 1px solid transparent;
+    place-content: center;
 
-    button {
-        font-size: var(--font-size-400);
+    p {
+        font-size: .75em !important;
+    }
+
+    &:nth-child(4) {
+        p {
+            width: clamp(50px, 25svw, 150px);
+        }
     }
 
     &:last-child {
         display: grid;
-        gap: .25rem;
+        width: clamp(50px, 25svw, 250px);
+        grid-template-columns: repeat(auto-fit, 120px);
+        gap: .5rem;
+        border: none;
+
+        button {
+            font-size: .75em;
+        }
     }
 }
