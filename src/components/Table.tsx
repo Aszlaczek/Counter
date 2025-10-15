@@ -1,7 +1,5 @@
 import { usePopUpStore, useUserListStore, useUserStore } from "../store"
 import '../style/Table.css';
-import editIcon from '../assets/edit-svgrepo-com.svg'
-import deleteIcon from '../assets/delete-svgrepo-com.svg'
 
 const Table = () => {
 
@@ -48,10 +46,10 @@ const Table = () => {
                             <td><p>{e.hours}</p></td>
                             <td>
                                 <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>
-                                    <img src={editIcon} alt="edit-icon" />
+                                    <img src='/edit-svgrepo-com.svg' alt="edit-icon" />
                                 </button>
                                 <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
-                                    <img src={deleteIcon} alt="delete-icon" />
+                                    <img src='delete-svgrepo-com.svg' alt="delete-icon" />
                                 </button>
                             </td>
 
