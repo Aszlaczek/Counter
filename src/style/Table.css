@@ -1,5 +1,9 @@
 @import './variable.css';
 
+.btn-export {
+    place-self: center start;
+}
+
 table {
     --border-radius: .5rem;
     width: 100%;

@@ -31,7 +31,7 @@
             right: 4px;
             color: var(--color);
             opacity: 1;
-            transition: opacity, scale var(--time);
+            transition: opacity, scale var(--time-1);
         }
 
         &:has(#inp:focus, #inp:focus-visible) {
