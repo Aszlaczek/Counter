@@ -46,10 +46,10 @@ const Table = () => {
                             <td><p>{e.hours}</p></td>
                             <td>
                                 <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>
-                                    <img src='src/assets/edit-svgrepo-com.svg' alt="edit-icon" />
+                                    <img src='src/public/edit-svgrepo-com.svg' alt="edit-icon" />
                                 </button>
                                 <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
-                                    <img src='src/assets/delete-svgrepo-com.svg' alt="delete-icon" />
+                                    <img src='src\public\delete-svgrepo-com.svg' alt="delete-icon" />
                                 </button>
                             </td>
 
