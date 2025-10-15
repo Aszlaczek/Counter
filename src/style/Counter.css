@@ -19,6 +19,7 @@
         padding: var(--padding-300);
         padding-right: var(--padding);
         position: relative;
+        width: clamp(8rem, 20svw, 50%);
         transition: box-shadow var(--time-1);
 
         &::after {

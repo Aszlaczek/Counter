@@ -1,7 +1,6 @@
 import { usePopUpStore, useUserListStore, useUserStore } from "../store"
 import '../style/Table.css';
 
-
 const Table = () => {
 
     const { list, removeUser, getSpecificUser } = useUserListStore()
@@ -40,13 +39,18 @@ const Table = () => {
                 {list?.map((e, i) => {
                     return (
                         < tr key={i} >
+
                             <td><p>{i + 1}</p></td>
                             <td><p>{e.name}</p></td>
                             <td><p>{e.surname}</p></td>
                             <td><p>{e.hours}</p></td>
                             <td>
-                                <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>Edytuj</button>
-                                <button className="btn" disabled={visible} onClick={() => removeUser(i)}>Usuń</button>
+                                <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>
+                                    <img src='src/assets/edit-svgrepo-com.svg' alt="edit-icon" />
+                                </button>
+                                <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
+                                    <img src='src/assets/delete-svgrepo-com.svg' alt="delete-icon" />
+                                </button>
                             </td>
 
                         </tr>

@@ -49,13 +49,21 @@ td {
 
     &:last-child {
         display: grid;
-        width: clamp(50px, 25svw, 250px);
-        grid-template-columns: repeat(auto-fit, 120px);
+        width: clamp(25px, 20svw, 180px);
+        grid-template-columns: repeat(auto-fit, 50px);
         gap: .5rem;
         border: none;
 
         button {
-            font-size: .75em;
+            display: grid;
+            place-content: center;
+            width: 75%;
+            padding-inline: 0;
+
+            img {
+                width: 1em;
+                fill: white;
+            }
         }
     }
 }

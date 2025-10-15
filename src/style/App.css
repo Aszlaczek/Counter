@@ -1,7 +1,7 @@
 @import './variable.css';
 
 .container-main {
-    padding-inline: clamp(0, 2svw, var(--padding-500));
+    padding-inline: clamp(0px, 2svw, var(--padding-500));
     display: grid;
     grid-template-rows: min-content min-content 0fr min-content;
     gap: var(--padding-500);

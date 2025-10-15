@@ -41,7 +41,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={saveUser} className={'form-create'}>
+        <form onSubmit={saveUser} className={'form-create '}>
             <label style={{ '--item': 1 } as CSSProperties} htmlFor="name">
                 <input className={`${visible ? 'hide' : ''}`} type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
             </label>
