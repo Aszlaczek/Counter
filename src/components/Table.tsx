@@ -49,7 +49,7 @@ const Table = () => {
                                     <img src='/edit-svgrepo-com.svg' alt="edit-icon" />
                                 </button>
                                 <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
-                                    <img src='delete-svgrepo-com.svg' alt="delete-icon" />
+                                    <img src='/delete-svgrepo-com.svg' alt="delete-icon" />
                                 </button>
                             </td>
 
