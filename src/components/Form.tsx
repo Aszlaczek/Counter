@@ -1,4 +1,4 @@
-import { useEffect, type FormEvent } from 'react'
+import { useEffect, type CSSProperties, type FormEvent } from 'react'
 import type { User } from '../type'
 import { useHoursStore, usePopUpStore, useStateStore, useUserListStore, useUserStore } from '../store'
 import '../style/Form.css';
@@ -42,13 +42,13 @@ const Form = () => {
 
     return (
         <form onSubmit={saveUser} className={'form-create'}>
-            <label style={{ '--item': 1 }} htmlFor="name">
+            <label style={{ '--item': 1 } as CSSProperties} htmlFor="name">
                 <input className={`${visible ? 'hide' : ''}`} type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
             </label>
-            <label style={{ '--item': 2 }} htmlFor="surname">
+            <label style={{ '--item': 2 } as CSSProperties} htmlFor="surname">
                 <input className={`${visible ? 'hide' : ''}`} type="text" name="surname" id="surname" placeholder='Nazwisko' required value={user.surname} onChange={e => editUser('surname', e.target.value)} />
             </label>
-            <label style={{ '--item': 3 }} htmlFor="hours">
+            <label style={{ '--item': 3 } as CSSProperties} htmlFor="hours">
                 <input className={`${visible ? 'hide' : ''}`} type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
             </label>
             <button type='submit' disabled={!isDone}>{isDone ? 'Zapisz' : 'Czekaj...'}</button>
