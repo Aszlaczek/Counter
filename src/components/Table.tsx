@@ -2,6 +2,9 @@ import { usePopUpStore, useUserListStore, useUserStore } from "../store"
 import '../style/Table.css';
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
+import editIcon from '../assets/edit-svgrepo-com.svg'
+import deleteIcon from '../assets/delete-svgrepo-com.svg'
+
 
 const Table = () => {
 
@@ -35,7 +38,7 @@ const Table = () => {
 
     return (
         <>
-
+            {console.log(editIcon, deleteIcon)}
             {list.length >= 2 ? <button className='btn-export' onClick={handleExport}>Exportuj</button> : ''}
             <table>
                 <thead>
@@ -65,10 +68,10 @@ const Table = () => {
                                 <td><p>{e.hours}</p></td>
                                 <td>
                                     <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>
-                                        <img src='/edit-svgrepo-com.svg' alt="edit-icon" />
+                                        <img src={`${editIcon ?? '/edit-svgrepo-com.svg'}`} alt="edit-icon" />
                                     </button>
                                     <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
-                                        <img src='/delete-svgrepo-com.svg' alt="delete-icon" />
+                                        <img src={`${deleteIcon ?? '/delete-svgrepo-com.svg'}`} alt="delete-icon" />
                                     </button>
                                 </td>
 
