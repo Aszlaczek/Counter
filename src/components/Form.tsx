@@ -3,7 +3,7 @@ import type { User } from '../type'
 import { useHoursStore, usePopUpStore, useStateStore, useUserListStore, useUserStore } from '../store'
 import '../style/Form.css';
 
-const Form = () => {
+const Form = ({ isClosing }: { isClosing?: boolean }) => {
     const { user, editUser, removeInfo } = useUserStore()
     const { isDone, setStateFalse, setStateTrue } = useStateStore()
     const { allHours, setMin } = useHoursStore()
@@ -38,7 +38,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={saveUser} className={`form-create ${visible ? 'hide' : ''}`}>
+        <form onSubmit={saveUser} className={`form-create ${visible ? 'hide' : ''} ${isClosing ? 'exiting' : ''}`}>
             <h3 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--color-text)' }}>Dodaj Nowy Wpis</h3>
             <label htmlFor="name">
                 <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginLeft: '0.5rem' }}>Imię</p>
