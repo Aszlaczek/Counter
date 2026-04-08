@@ -5,9 +5,7 @@ import { saveAs } from 'file-saver'
 import editIcon from '../assets/edit-svgrepo-com.svg'
 import deleteIcon from '../assets/delete-svgrepo-com.svg'
 
-
 const Table = () => {
-
     const { list, removeUser, getSpecificUser } = useUserListStore()
     const { show, visible } = usePopUpStore()
     const { setUser } = useUserStore()
@@ -19,70 +17,63 @@ const Table = () => {
             setUser(user)
             return
         }
-        alert(`No user have id: ${id}`)
+        alert(`Błąd: Nie znaleziono użytkownika o ID: ${id}`)
     }
 
     const handleExport = () => {
         const worksheet = XLSX.utils.json_to_sheet(list)
         const workbook = XLSX.utils.book_new();
-
-        const date = Date().split(' ').slice(0, 5).join(' ')
-
+        const date = new Date().toISOString().split('T')[0]
         XLSX.utils.book_append_sheet(workbook, worksheet, `Dane`)
-
         const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-
         const blob = new Blob([excelBuffer], { type: 'application/octet-stream' })
-        saveAs(blob, `Obecnosc_${date}.xlsx`)
+        saveAs(blob, `Rozliczenie_${date}.xlsx`)
     }
 
+    if (list.length === 0) return null;
+
     return (
-        <>
-            {console.log(editIcon, deleteIcon)}
-            {list.length >= 2 ? <button className='btn-export' onClick={handleExport}>Exportuj</button> : ''}
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <h3>L.P.</h3>
-                        </th>
-                        <th>
-                            <h3>Imię</h3>
-                        </th>
-                        <th>
-                            <h3>Nazwisko</h3>
-                        </th>
-                        <th>
-                            <h3>Godziny</h3>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {list?.map((e, i) => {
-                        return (
-                            < tr key={i} >
-
-                                <td><p>{i + 1}</p></td>
-                                <td><p>{e.name}</p></td>
-                                <td><p>{e.surname}</p></td>
-                                <td><p>{e.hours}</p></td>
+        <div className="container-outer" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ fontSize: 'var(--font-size-lg)' }}>Zapisane Dane</h3>
+                {list.length >= 1 && <button className='btn-export' onClick={handleExport}>Eksportuj do Excel</button>}
+            </div>
+            
+            <div className="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>L.P.</th>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Godziny</th>
+                            <th>Opcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {list.map((e, i) => (
+                            <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{e.name}</td>
+                                <td>{e.surname}</td>
+                                <td>{e.hours}</td>
                                 <td>
-                                    <button className="btn" disabled={visible} onClick={() => getUserHandler(i)}>
-                                        <img src={`${editIcon ?? '/edit-svgrepo-com.svg'}`} alt="edit-icon" />
-                                    </button>
-                                    <button className="btn" disabled={visible} onClick={() => removeUser(i)}>
-                                        <img src={`${deleteIcon ?? '/delete-svgrepo-com.svg'}`} alt="delete-icon" />
-                                    </button>
+                                    <div className="table-actions">
+                                        <button className="btn-icon" disabled={visible} onClick={() => getUserHandler(i)} title="Edytuj">
+                                            <img src={editIcon} alt="Edytuj" />
+                                        </button>
+                                        <button className="btn-icon" disabled={visible} onClick={() => removeUser(i)} title="Usuń">
+                                            <img src={deleteIcon} alt="Usuń" />
+                                        </button>
+                                    </div>
                                 </td>
-
                             </tr>
-                        )
-                    })}
-                </tbody>
-            </table >
-        </>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 
 export default Table
-

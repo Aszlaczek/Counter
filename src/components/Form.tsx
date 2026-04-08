@@ -1,10 +1,9 @@
-import { useEffect, type CSSProperties, type FormEvent } from 'react'
+import { useEffect, type FormEvent } from 'react'
 import type { User } from '../type'
 import { useHoursStore, usePopUpStore, useStateStore, useUserListStore, useUserStore } from '../store'
 import '../style/Form.css';
 
 const Form = () => {
-
     const { user, editUser, removeInfo } = useUserStore()
     const { isDone, setStateFalse, setStateTrue } = useStateStore()
     const { allHours, setMin } = useHoursStore()
@@ -13,45 +12,49 @@ const Form = () => {
 
     useEffect(() => {
         editUser('hours', allHours)
-    }, [allHours])
-
+    }, [allHours, editUser])
 
     const saveUser = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-        // Set wait to false
         setStateFalse()
 
-        // Get data from Form
         const data = new FormData(e.currentTarget)
         const [name, surname, hours] = [data.get('name'), data.get('surname'), data.get('hours')]
-        const user: User = { id: list.length, name: name as string, surname: surname as string, hours: hours as string, date: Date().split(' ').slice(0, 5).join(' ') }
+        const newUser: User = { 
+            id: list.length, 
+            name: name as string, 
+            surname: surname as string, 
+            hours: hours as string, 
+            date: new Date().toLocaleString() 
+        }
 
-        console.log(hours)
-
-        addToList(user)
+        addToList(newUser)
         removeInfo()
         setMin(0)
 
         setTimeout(() => {
-            console.log(user)
             setStateTrue()
-        }, 1000)
-
+        }, 800)
     }
 
     return (
-        <form onSubmit={saveUser} className={'form-create '}>
-            <label style={{ '--item': 1 } as CSSProperties} htmlFor="name">
-                <input className={`${visible ? 'hide' : ''}`} type="text" name="name" id="name" placeholder='Imię' required value={user.name} onChange={e => editUser('name', e.target.value)} />
+        <form onSubmit={saveUser} className={`form-create ${visible ? 'hide' : ''}`}>
+            <h3 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--color-text)' }}>Dodaj Nowy Wpis</h3>
+            <label htmlFor="name">
+                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginLeft: '0.5rem' }}>Imię</p>
+                <input type="text" name="name" id="name" placeholder='Wpisz imię' required value={user.name} onChange={e => editUser('name', e.target.value)} autoComplete="off" />
             </label>
-            <label style={{ '--item': 2 } as CSSProperties} htmlFor="surname">
-                <input className={`${visible ? 'hide' : ''}`} type="text" name="surname" id="surname" placeholder='Nazwisko' required value={user.surname} onChange={e => editUser('surname', e.target.value)} />
+            <label htmlFor="surname">
+                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginLeft: '0.5rem' }}>Nazwisko</p>
+                <input type="text" name="surname" id="surname" placeholder='Wpisz nazwisko' required value={user.surname} onChange={e => editUser('surname', e.target.value)} autoComplete="off" />
             </label>
-            <label style={{ '--item': 3 } as CSSProperties} htmlFor="hours">
-                <input className={`${visible ? 'hide' : ''}`} type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
+            <label htmlFor="hours">
+                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginLeft: '0.5rem' }}>Zliczone godziny</p>
+                <input type="text" name="hours" id="hours" placeholder='0h 0m' value={user.hours} onChange={e => editUser('hours', e.target.value)} />
             </label>
-            <button type='submit' disabled={!isDone}>{isDone ? 'Zapisz' : 'Czekaj...'}</button>
+            <button type='submit' disabled={!isDone}>
+                {isDone ? 'Dodaj do Listy' : 'Przetwarzanie...'}
+            </button>
         </form>
     )
 }

@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import '../style/Counter.css'
 import { useHoursStore } from '../store'
-const Counter = () => {
 
+const Counter = () => {
     const count = useHoursStore()
 
     useEffect(() => {
         const len = String(count.min)
         if (len.length >= 5) {
-            alert("Za duzo znaków :P")
+            alert("Za dużo znaków :P")
             count.setMin(0)
             return
         }
@@ -17,15 +17,30 @@ const Counter = () => {
         }
     }, [count.min])
 
-
     return (
-        <div className='container-outer'>
-            <div className='container-inner'>
-                <h1>Napisz wartość godzin w minutach</h1>
-                <div className="box">
-                    <input type="number" name="inp" id="inp" onChange={e => { count.setMin(Number(e.target.value)) }} min={0} inputMode='numeric' max={1000} placeholder='0' value={count.min === 0 ? '' : count.min} />
+        <div className='container-inner'>
+            <h1>Przelicznik Czasu</h1>
+            <div className="counter-card">
+                <div className="input-group">
+                    <p style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Wpisz minuty</p>
+                    <div className="input-wrapper">
+                        <input 
+                            type="number" 
+                            name="inp" 
+                            id="inp" 
+                            onChange={e => { count.setMin(Number(e.target.value)) }} 
+                            min={0} 
+                            inputMode='numeric' 
+                            max={9999} 
+                            placeholder='0' 
+                            value={count.min === 0 ? '' : count.min} 
+                        />
+                    </div>
                 </div>
-                <h2>{count.allHours}</h2>
+                <div className="result-display">
+                    <p>Wynik w godzinach</p>
+                    <h2>{count.allHours}</h2>
+                </div>
             </div>
         </div>
     )
