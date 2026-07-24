@@ -1,0 +1,39 @@
+import api from "./api";
+import type {
+  LoginRequest,
+  RegisterRequest,
+  AuthResponse,
+  TokenRefreshResponse,
+  UserProfile,
+} from "../type";
+
+export const authService = {
+  async login(data: LoginRequest): Promise<AuthResponse> {
+    // The API might use form data for OAuth2 compatible endpoint
+    const formData = new URLSearchParams();
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+
+    const res = await api.post<AuthResponse>("/api/auth/login", formData, {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+    return res.data;
+  },
+
+  async register(data: RegisterRequest): Promise<{ message: string }> {
+    const res = await api.post("/api/auth/register", data);
+    return res.data;
+  },
+
+  async refresh(refreshToken: string): Promise<TokenRefreshResponse> {
+    const res = await api.post<TokenRefreshResponse>("/api/auth/refresh", {
+      refresh_token: refreshToken,
+    });
+    return res.data;
+  },
+
+  async getMe(): Promise<UserProfile> {
+    const res = await api.get<UserProfile>("/api/auth/me");
+    return res.data;
+  },
+};

@@ -1,29 +1,35 @@
-import { usePopUpStore, useUserListStore, useUserStore } from "../store";
+import { usePersonListStore } from "../store";
 import "../style/Table.css";
 import ExcelJS from "exceljs";
 import editIcon from "../assets/edit-svgrepo-com.svg";
 import deleteIcon from "../assets/delete-svgrepo-com.svg";
+import { personService } from "../services/personService";
 
-const Table = () => {
-  const { list, removeUser, getSpecificUser } = useUserListStore();
-  const { show, visible } = usePopUpStore();
-  const { setUser } = useUserStore();
+type Props = {
+  onUpdate: () => Promise<void>;
+};
 
-  const getUserHandler = (id: number) => {
-    show();
-    const user = getSpecificUser(id);
-    if (user) {
-      setUser(user);
-      return;
+const Table = ({ onUpdate }: Props) => {
+  const { list } = usePersonListStore();
+
+  const handleEdit = (id: number) => {
+    window.dispatchEvent(new CustomEvent("open-edit", { detail: { id } }));
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Czy na pewno chcesz usunąć ten wpis?")) return;
+    try {
+      await personService.delete(id);
+      await onUpdate();
+    } catch {
+      alert("Nie udało się usunąć wpisu.");
     }
-    alert(`Błąd: Nie znaleziono użytkownika o ID: ${id}`);
   };
 
   const handleExport = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Dane");
 
-    // Define Polish column headers
     worksheet.columns = [
       { header: "L.P.", key: "lp", width: 8 },
       { header: "Imię", key: "name", width: 20 },
@@ -32,18 +38,16 @@ const Table = () => {
       { header: "Data", key: "date", width: 22 },
     ];
 
-    // Add rows with index starting from 1
-    list.forEach((user, i) => {
+    list.forEach((person, i) => {
       worksheet.addRow({
         lp: i + 1,
-        name: user.name,
-        surname: user.surname,
-        hours: user.hours,
-        date: user.date,
+        name: person.name,
+        surname: person.surname,
+        hours: person.hours,
+        date: person.date,
       });
     });
 
-    // Style the header row
     const headerRow = worksheet.getRow(1);
     headerRow.font = { bold: true };
     headerRow.eachCell((cell) => {
@@ -99,30 +103,30 @@ const Table = () => {
               <th>Imię</th>
               <th>Nazwisko</th>
               <th>Godziny</th>
+              <th>Data</th>
               <th>Opcje</th>
             </tr>
           </thead>
           <tbody>
-            {list.map((e, i) => (
-              <tr key={i}>
+            {list.map((person, i) => (
+              <tr key={person.id}>
                 <td>{i + 1}</td>
-                <td>{e.name}</td>
-                <td>{e.surname}</td>
-                <td>{e.hours}</td>
+                <td>{person.name}</td>
+                <td>{person.surname}</td>
+                <td>{person.hours}</td>
+                <td>{person.date}</td>
                 <td>
                   <div className="table-actions">
                     <button
                       className="btn-icon"
-                      disabled={visible}
-                      onClick={() => getUserHandler(i)}
+                      onClick={() => handleEdit(person.id)}
                       title="Edytuj"
                     >
                       <img src={editIcon} alt="Edytuj" />
                     </button>
                     <button
                       className="btn-icon"
-                      disabled={visible}
-                      onClick={() => removeUser(i)}
+                      onClick={() => handleDelete(person.id)}
                       title="Usuń"
                     >
                       <img src={deleteIcon} alt="Usuń" />
@@ -139,3 +143,4 @@ const Table = () => {
 };
 
 export default Table;
+
