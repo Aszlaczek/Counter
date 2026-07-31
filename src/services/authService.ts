@@ -9,14 +9,7 @@ import type {
 
 export const authService = {
   async login(data: LoginRequest): Promise<AuthResponse> {
-    // The API might use form data for OAuth2 compatible endpoint
-    const formData = new URLSearchParams();
-    formData.append("username", data.username);
-    formData.append("password", data.password);
-
-    const res = await api.post<AuthResponse>("/api/auth/login", formData, {
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    });
+    const res = await api.post<AuthResponse>("/api/auth/login", data);
     return res.data;
   },
 

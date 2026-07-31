@@ -34,8 +34,9 @@ const Table = ({ onUpdate }: Props) => {
       { header: "L.P.", key: "lp", width: 8 },
       { header: "Imię", key: "name", width: 20 },
       { header: "Nazwisko", key: "surname", width: 25 },
-      { header: "Godziny", key: "hours", width: 15 },
-      { header: "Data", key: "date", width: 22 },
+      { header: "Wydział", key: "faculty", width: 20 },
+      { header: "Aktywny", key: "isWorking", width: 12 },
+      { header: "Data utworzenia", key: "createdAt", width: 22 },
     ];
 
     list.forEach((person, i) => {
@@ -43,8 +44,9 @@ const Table = ({ onUpdate }: Props) => {
         lp: i + 1,
         name: person.name,
         surname: person.surname,
-        hours: person.hours,
-        date: person.date,
+        faculty: person.faculty,
+        isWorking: person.is_working ? "Tak" : "Nie",
+        createdAt: new Date(person.created_at).toLocaleString("pl-PL"),
       });
     });
 
@@ -102,8 +104,8 @@ const Table = ({ onUpdate }: Props) => {
               <th>L.P.</th>
               <th>Imię</th>
               <th>Nazwisko</th>
-              <th>Godziny</th>
-              <th>Data</th>
+              <th>Wydział</th>
+              <th>Aktywny</th>
               <th>Opcje</th>
             </tr>
           </thead>
@@ -113,8 +115,8 @@ const Table = ({ onUpdate }: Props) => {
                 <td>{i + 1}</td>
                 <td>{person.name}</td>
                 <td>{person.surname}</td>
-                <td>{person.hours}</td>
-                <td>{person.date}</td>
+                <td>{person.faculty}</td>
+                <td>{person.is_working ? "Tak" : "Nie"}</td>
                 <td>
                   <div className="table-actions">
                     <button
@@ -143,4 +145,3 @@ const Table = ({ onUpdate }: Props) => {
 };
 
 export default Table;
-

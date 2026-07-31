@@ -16,11 +16,11 @@
 
 - [x] Rewrite `src/store.ts` — Auth store + token management, keep existing stores but refactor
 
-## Step 4: Auth Components
+## ~~Step 4: Auth Components~~
 
-- [ ] Rewrite `src/components/Login.tsx` — Login form with API call
-- [ ] Create `src/components/Register.tsx` — Registration form
-- [ ] Create `src/components/ProtectedRoute.tsx` — Auth guard component
+- [x] Rewrite `src/components/Login.tsx` — Login form with API call
+- [x] Create `src/components/Register.tsx` — Registration form (includes name, surname fields)
+- [x] Create `src/components/ProtectedRoute.tsx` — Auth guard component
 
 ## Step 5: Main App & Routing
 

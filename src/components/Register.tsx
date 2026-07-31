@@ -6,6 +6,8 @@ const Register = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +32,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await authService.register({ username, email, password });
+      await authService.register({ username, email, password, name, surname });
       setSuccess("Konto utworzone! Za chwilę zostaniesz przekierowany...");
       setTimeout(() => navigate("/login"), 2000);
     } catch (err: unknown) {
@@ -153,6 +155,48 @@ const Register = () => {
             placeholder="Wpisz adres email"
             required
             autoComplete="email"
+            style={{ width: "100%" }}
+          />
+        </label>
+
+        <label htmlFor="reg-name">
+          <p
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: "var(--color-text-muted)",
+              marginBottom: "0.25rem",
+            }}
+          >
+            Imię
+          </p>
+          <input
+            type="text"
+            id="reg-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Wpisz imię"
+            autoComplete="given-name"
+            style={{ width: "100%" }}
+          />
+        </label>
+
+        <label htmlFor="reg-surname">
+          <p
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: "var(--color-text-muted)",
+              marginBottom: "0.25rem",
+            }}
+          >
+            Nazwisko
+          </p>
+          <input
+            type="text"
+            id="reg-surname"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+            placeholder="Wpisz nazwisko"
+            autoComplete="family-name"
             style={{ width: "100%" }}
           />
         </label>

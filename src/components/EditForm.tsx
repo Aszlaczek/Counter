@@ -14,7 +14,8 @@ const EditForm = ({ onUpdate }: Props) => {
   const [person, setPerson] = useState<Person | null>(null);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [hours, setHours] = useState("");
+  const [faculty, setFaculty] = useState("");
+  const [isWorking, setIsWorking] = useState(true);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -24,7 +25,8 @@ const EditForm = ({ onUpdate }: Props) => {
         setPerson(found);
         setName(found.name);
         setSurname(found.surname);
-        setHours(found.hours);
+        setFaculty(found.faculty);
+        setIsWorking(found.is_working);
         setVisible(true);
       }
     };
@@ -37,7 +39,12 @@ const EditForm = ({ onUpdate }: Props) => {
     if (!person) return;
 
     try {
-      await personService.update(person.id, { name, surname, hours });
+      await personService.update(person.id, {
+        name,
+        surname,
+        faculty,
+        is_working: isWorking,
+      });
       setVisible(false);
       setPerson(null);
       await onUpdate();
@@ -86,19 +93,34 @@ const EditForm = ({ onUpdate }: Props) => {
             autoComplete="off"
           />
         </label>
-        <label htmlFor="e-hours">
-          <p>Godziny</p>
+        <label htmlFor="e-faculty">
+          <p>Wydział</p>
           <input
             type="text"
-            name="e-hours"
-            required
-            id="e-hours"
-            value={hours}
+            name="e-faculty"
+            id="e-faculty"
+            value={faculty}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setHours(e.target.value)
+              setFaculty(e.target.value)
             }
             autoComplete="off"
           />
+        </label>
+        <label
+          htmlFor="e-isWorking"
+          style={{ flexDirection: "row", alignItems: "center", gap: "0.5rem" }}
+        >
+          <input
+            type="checkbox"
+            name="e-isWorking"
+            id="e-isWorking"
+            checked={isWorking}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setIsWorking(e.target.checked)
+            }
+            style={{ width: "auto" }}
+          />
+          <p>Aktywny</p>
         </label>
         <div className="container-btn">
           <button type="button" className="btn-cancel" onClick={handleHide}>

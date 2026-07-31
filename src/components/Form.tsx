@@ -1,6 +1,5 @@
-import { useEffect, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { personService } from "../services/personService";
-import { useHoursStore, useUserStore } from "../store";
 import "../style/Form.css";
 
 type Props = {
@@ -9,25 +8,23 @@ type Props = {
 };
 
 const Form = ({ isClosing, onSuccess }: Props) => {
-  const { user, editUser, removeInfo } = useUserStore();
-  const { allHours, setMin } = useHoursStore();
-
-  useEffect(() => {
-    editUser("hours", allHours);
-  }, [allHours, editUser]);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [faculty, setFaculty] = useState("Unknown");
 
   const saveUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       await personService.create({
-        name: user.name,
-        surname: user.surname,
-        hours: user.hours || "0h 0min",
+        name,
+        surname,
+        faculty: faculty || "Unknown",
       });
 
-      removeInfo();
-      setMin(0);
+      setName("");
+      setSurname("");
+      setFaculty("Unknown");
       onSuccess?.();
     } catch (err) {
       alert("Nie udało się dodać osoby. Sprawdź połączenie z API.");
@@ -46,7 +43,7 @@ const Form = ({ isClosing, onSuccess }: Props) => {
           color: "var(--color-text)",
         }}
       >
-        Dodaj Nowy Wpis
+        Dodaj Nową Osobę
       </h3>
       <label htmlFor="name">
         <p
@@ -64,8 +61,8 @@ const Form = ({ isClosing, onSuccess }: Props) => {
           id="name"
           placeholder="Wpisz imię"
           required
-          value={user.name}
-          onChange={(e) => editUser("name", e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           autoComplete="off"
         />
       </label>
@@ -85,12 +82,12 @@ const Form = ({ isClosing, onSuccess }: Props) => {
           id="surname"
           placeholder="Wpisz nazwisko"
           required
-          value={user.surname}
-          onChange={(e) => editUser("surname", e.target.value)}
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
           autoComplete="off"
         />
       </label>
-      <label htmlFor="hours">
+      <label htmlFor="faculty">
         <p
           style={{
             fontSize: "var(--font-size-xs)",
@@ -98,15 +95,16 @@ const Form = ({ isClosing, onSuccess }: Props) => {
             marginLeft: "0.5rem",
           }}
         >
-          Zliczone godziny
+          Wydział
         </p>
         <input
           type="text"
-          name="hours"
-          id="hours"
-          placeholder="0h 0m"
-          value={user.hours}
-          onChange={(e) => editUser("hours", e.target.value)}
+          name="faculty"
+          id="faculty"
+          placeholder="Wydział"
+          value={faculty}
+          onChange={(e) => setFaculty(e.target.value)}
+          autoComplete="off"
         />
       </label>
       <button type="submit">Dodaj do Listy</button>
