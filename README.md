@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/31641315/README.md)
 # Counter — konwerter i ewidencja godzin pracy
 
 Narzędzie webowe do szybkiego przeliczania minut na format godzina:minuta (np. `90 min → 1h 30min`) oraz prowadzenia ewidencji przepracowanych godzin z eksportem do Excela.
