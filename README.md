@@ -1,75 +1,70 @@
-# React + TypeScript + Vite
+# Counter — konwerter i ewidencja godzin pracy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Narzędzie webowe do szybkiego przeliczania minut na format godzina:minuta (np. `90 min → 1h 30min`) oraz prowadzenia ewidencji przepracowanych godzin z eksportem do Excela.
 
-Currently, two official plugins are available:
+🔗 **Live demo:** [counter-psi-blush.vercel.app](https://counter-psi-blush.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## O projekcie
 
-## React Compiler
+Aplikacja powstała jako odpowiedź na konkretny, powtarzalny problem pracowników administracji (starostwo): ręczne przeliczanie sum godzin pracy zapisanych w minutach było wolne i podatne na błędy. Zamiast liczyć to w głowie albo w kalkulatorze, aplikacja:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- błyskawicznie przelicza minuty na czytelny format godzin i minut,
+- pozwala dodawać i edytować pojedyncze wpisy godzinowe,
+- zbiera je w tabeli,
+- eksportuje całość do pliku `.xlsx` z polskimi nagłówkami kolumn, gotowego do dalszych obliczeń w Excelu.
 
-Note: This will impact Vite dev & build performances.
+Aplikacja nie zapisuje żadnych danych wrażliwych, dzięki czemu — mimo że powstała na potrzeby konkretnego urzędu — może być swobodnie używana przez każdego, kto potrzebuje szybko przeliczyć lub zestawić godziny pracy.
 
-## Expanding the ESLint configuration
+## Funkcjonalności
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ⏱️ **Konwerter minut na godziny** — szybkie przeliczenie bez liczenia w pamięci
+- ➕ **Dodawanie wpisów** przez formularz
+- ✏️ **Edycja istniejących wpisów** (formularz edycji w oknie modalnym)
+- 📋 **Tabela zbiorcza** wszystkich wpisów
+- 📤 **Eksport do Excela (.xlsx)** z polskimi nagłówkami kolumn — gotowe do dalszej pracy w arkuszu
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Stack technologiczny
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Warstwa | Technologia |
+|---|---|
+| UI | React 19 + TypeScript |
+| Build | Vite 7 |
+| State management | Zustand |
+| Eksport danych | ExcelJS |
+| Lint | ESLint + typescript-eslint |
+| Hosting | Vercel |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Uruchomienie lokalne
+
+```bash
+git clone https://github.com/Aszlaczek/Counter.git
+cd Counter
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Dostępne skrypty:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev       # tryb deweloperski
+npm run build     # build produkcyjny (tsc + vite build)
+npm run lint      # sprawdzenie kodu ESLintem
+npm run preview   # podgląd builda produkcyjnego
 ```
+
+## Struktura projektu
+
+```
+src/
+├── components/
+│   ├── Counter.tsx      # konwerter minut na h:min
+│   ├── Form.tsx         # dodawanie wpisu
+│   ├── EditForm.tsx     # edycja wpisu
+│   └── Table.tsx        # tabela wpisów + eksport do Excela
+├── store/                # stan globalny (zustand)
+└── App.tsx
+```
+
+## Autor
+
+Adrian Wzorek
