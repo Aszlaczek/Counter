@@ -104,7 +104,7 @@ const Table = () => {
           </thead>
           <tbody>
             {list.map((e, i) => (
-              <tr key={i}>
+              <tr key={e.id}>
                 <td>{i + 1}</td>
                 <td>{e.name}</td>
                 <td>{e.surname}</td>
@@ -114,7 +114,7 @@ const Table = () => {
                     <button
                       className="btn-icon"
                       disabled={visible}
-                      onClick={() => getUserHandler(i)}
+                      onClick={() => getUserHandler(e.id as number)}
                       title="Edytuj"
                     >
                       <img src={editIcon} alt="Edytuj" />
@@ -122,7 +122,7 @@ const Table = () => {
                     <button
                       className="btn-icon"
                       disabled={visible}
-                      onClick={() => removeUser(i)}
+                      onClick={() => removeUser(e.id as number)}
                       title="Usuń"
                     >
                       <img src={deleteIcon} alt="Usuń" />
