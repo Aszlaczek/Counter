@@ -3,14 +3,7 @@ import "../style/Table.css";
 import ExcelJS from "exceljs";
 import editIcon from "../assets/edit-svgrepo-com.svg";
 import deleteIcon from "../assets/delete-svgrepo-com.svg";
-
-const parseHours = (hours: string): { hours: number; minutes: number } => {
-  const match = hours.match(/(\d+)h\s*(\d+)min/);
-  if (match) {
-    return { hours: parseInt(match[1], 10), minutes: parseInt(match[2], 10) };
-  }
-  return { hours: 0, minutes: 0 };
-};
+import { formatMinutes, splitMinutes } from "../utils/time";
 
 const Table = () => {
   const { list, removeUser, getSpecificUser } = useUserListStore();
@@ -38,18 +31,20 @@ const Table = () => {
       { header: "Nazwisko", key: "surname", width: 25 },
       { header: "Godziny", key: "hours", width: 15 },
       { header: "Minuty", key: "minutes", width: 15 },
+      { header: "Łącznie minut", key: "totalMinutes", width: 18 },
       { header: "Data", key: "date", width: 22 },
     ];
 
     // Add rows with index starting from 1
     list.forEach((user, i) => {
-      const { hours, minutes } = parseHours(user.hours);
+      const { hours, minutes } = splitMinutes(user.minutes);
       worksheet.addRow({
         lp: i + 1,
         name: user.name,
         surname: user.surname,
         hours: hours,
         minutes: minutes,
+        totalMinutes: user.minutes,
         date: user.date,
       });
     });
@@ -119,7 +114,7 @@ const Table = () => {
                 <td>{i + 1}</td>
                 <td>{e.name}</td>
                 <td>{e.surname}</td>
-                <td>{e.hours}</td>
+                <td>{formatMinutes(e.minutes)}</td>
                 <td>
                   <div className="table-actions">
                     <button

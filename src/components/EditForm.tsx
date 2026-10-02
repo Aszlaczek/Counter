@@ -1,6 +1,7 @@
 import { type ChangeEvent, type FormEvent } from 'react'
 import type { User } from '../type'
 import { usePopUpStore, useUserListStore, useUserStore } from '../store'
+import { formatMinutes } from '../utils/time'
 import '../style/EditForm.css'
 
 const EditForm = () => {
@@ -17,13 +18,13 @@ const EditForm = () => {
         }
 
         const data = new FormData(e.currentTarget)
-        const [name, surname, hours] = [data.get('e-name'), data.get('e-surname'), data.get('e-hours')]
+        const [name, surname, minutes] = [data.get('e-name'), data.get('e-surname'), data.get('e-minutes')]
 
         const editedUser: User = {
             id: user.id,
             name: name as string,
             surname: surname as string,
-            hours: hours as string,
+            minutes: Number(minutes),
             date: new Date().toLocaleString()
         }
 
@@ -55,9 +56,10 @@ const EditForm = () => {
                     <p>Nazwisko</p>
                     <input type="text" name="e-surname" required id="e-surname" value={user.surname} onChange={e => setChange(e)} autoComplete="off" />
                 </label>
-                <label htmlFor="e-hours">
-                    <p>Godziny</p>
-                    <input type="text" name="e-hours" required id="e-hours" value={user.hours} onChange={e => setChange(e)} autoComplete="off" />
+                <label htmlFor="e-minutes">
+                    <p>Minuty</p>
+                    <input type="number" name="e-minutes" required id="e-minutes" min={0} max={9999} step={1} inputMode="numeric" value={user.minutes} onChange={e => setChange(e)} autoComplete="off" />
+                    <p>= {formatMinutes(user.minutes)}</p>
                 </label>
                 <div className="container-btn">
                     <button type="button" className="btn-cancel" onClick={handleHide}>Anuluj</button>

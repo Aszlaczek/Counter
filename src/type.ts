@@ -2,6 +2,6 @@ export type User = {
     id: number | null,
     name: string,
     surname: string,
-    hours: string,
+    minutes: number,
     date: string
 }

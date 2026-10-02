@@ -3,17 +3,17 @@ import type { User } from "./type";
 
 type UserStoreSchema = {
   user: User;
-  editUser: (option: string, state: string) => void;
+  editUser: (option: string, state: string | number) => void;
   removeInfo: () => void;
   setUser: (user: User) => void;
 };
 
 export const useUserStore = create<UserStoreSchema>((set, get) => ({
-  user: { id: null, name: "", surname: "", hours: "", date: "" },
+  user: { id: null, name: "", surname: "", minutes: 0, date: "" },
   editUser: (option, state) =>
     set({ user: { ...get().user, [option]: state } }),
   removeInfo: () =>
-    set({ user: { id: null, name: "", surname: "", hours: "", date: "" } }),
+    set({ user: { id: null, name: "", surname: "", minutes: 0, date: "" } }),
   setUser: (user) => set({ user: user }),
 }));
 
