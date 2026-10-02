@@ -25,10 +25,11 @@ The app doesn't store any sensitive data, so — even though it was built for a 
 ### Features
 
 - ⏱️ **Minutes-to-hours converter** — instant conversion, no mental math
-- ➕ **Adding entries** via a form
+- ➕ **Adding entries** via a form with auto-reset after submit or close
 - ✏️ **Editing existing entries** (edit form in a modal window)
+- 🗑️ **Deleting entries** — safe removal with unique ID tracking (no collisions after deletion)
 - 📋 **Summary table** of all entries
-- 📤 **Excel export (.xlsx)** with Polish column headers — ready for further work in a spreadsheet
+- 📤 **Excel export (.xlsx)** with Polish column headers — separate **Godziny** (hours) and **Minuty** (minutes) numeric columns for direct formula use
 
 ### Tech stack
 
@@ -65,12 +66,44 @@ npm run preview   # preview the production build
 src/
 ├── components/
 │   ├── Counter.tsx      # minutes-to-h:min converter
-│   ├── Form.tsx         # adding an entry
-│   ├── EditForm.tsx     # editing an entry
-│   └── Table.tsx        # entries table + Excel export
-├── store/                # global state (zustand)
-└── App.tsx
+│   ├── Form.tsx         # adding an entry (auto-reset, hours sync)
+│   ├── EditForm.tsx     # editing an entry (modal)
+│   └── Table.tsx        # entries table + Excel export (split hours/minutes)
+├── store.ts             # global state (zustand) — user, hours, list, UI state
+├── type.ts              # User type definition
+├── App.tsx              # main layout, form toggle with state reset
+└── main.tsx             # entry point
 ```
+
+### Data model
+
+```ts
+type User = {
+  id: number | null;   // auto-assigned from monotonic counter (nextId)
+  name: string;
+  surname: string;
+  hours: string;       // format: "1h 30min"
+  date: string;        // locale date string
+}
+```
+
+### Excel export format
+
+| Column | Key | Type | Description |
+|---|---|---|---|
+| L.P. | `lp` | number | Row index (1-based) |
+| Imię | `name` | string | First name |
+| Nazwisko | `surname` | string | Last name |
+| Godziny | `hours` | number | Hours (parsed from "Xh Ymin") |
+| Minuty | `minutes` | number | Minutes (parsed from "Xh Ymin") |
+| Data | `date` | string | Entry date/time |
+
+### Recent fixes
+
+- **Delete/edit bug** — `getSpecificUser` no longer subtracts 1 from the ID; editing and deleting now target the correct user
+- **ID collisions** — new entries use a monotonic `nextId` counter instead of `list.length`, preventing conflicts after deletion
+- **Form reset** — name/surname/hours fields clear after submit and when the form is closed without submitting
+- **Excel formulas** — hours and minutes are exported as separate numeric columns so users can create formulas directly in Excel
 
 ### Author
 
@@ -97,10 +130,11 @@ Aplikacja nie zapisuje żadnych danych wrażliwych, dzięki czemu — mimo że p
 ### Funkcjonalności
 
 - ⏱️ **Konwerter minut na godziny** — szybkie przeliczenie bez liczenia w pamięci
-- ➕ **Dodawanie wpisów** przez formularz
+- ➕ **Dodawanie wpisów** przez formularz z automatycznym czyszczeniem po zapisu lub zamknięciu
 - ✏️ **Edycja istniejących wpisów** (formularz edycji w oknie modalnym)
+- 🗑️ **Usuwanie wpisów** — bezpieczne usuwanie z unikalnymi ID (bez kolizji po usunięciu)
 - 📋 **Tabela zbiorcza** wszystkich wpisów
-- 📤 **Eksport do Excela (.xlsx)** z polskimi nagłówkami kolumn — gotowe do dalszej pracy w arkuszu
+- 📤 **Eksport do Excela (.xlsx)** z polskimi nagłówkami kolumn — osobne kolumny **Godziny** i **Minuty** (liczbowe) do bezpośredniego tworzenia formuł
 
 ### Stack technologiczny
 
@@ -137,12 +171,44 @@ npm run preview   # podgląd builda produkcyjnego
 src/
 ├── components/
 │   ├── Counter.tsx      # konwerter minut na h:min
-│   ├── Form.tsx         # dodawanie wpisu
-│   ├── EditForm.tsx     # edycja wpisu
-│   └── Table.tsx        # tabela wpisów + eksport do Excela
-├── store/                # stan globalny (zustand)
-└── App.tsx
+│   ├── Form.tsx         # dodawanie wpisu (auto-reset, synchronizacja godzin)
+│   ├── EditForm.tsx     # edycja wpisu (modal)
+│   └── Table.tsx        # tabela wpisów + eksport do Excela (osobne godziny/minuty)
+├── store.ts             # stan globalny (zustand) — user, hours, list, UI
+├── type.ts              # definicja typu User
+├── App.tsx              # główny layout, przełączanie formularza z resetem stanu
+└── main.tsx             # punkt wejścia
 ```
+
+### Model danych
+
+```ts
+type User = {
+  id: number | null;   // przypisywane automatycznie z licznika (nextId)
+  name: string;
+  surname: string;
+  hours: string;       // format: "1h 30min"
+  date: string;        // data w formacie lokalnym
+}
+```
+
+### Format eksportu do Excela
+
+| Kolumna | Klucz | Typ | Opis |
+|---|---|---|---|
+| L.P. | `lp` | liczba | Numer wiersza (od 1) |
+| Imię | `name` | tekst | Imię |
+| Nazwisko | `surname` | tekst | Nazwisko |
+| Godziny | `hours` | liczba | Godziny (parsowane z "Xh Ymin") |
+| Minuty | `minutes` | liczba | Minuty (parsowane z "Xh Ymin") |
+| Data | `date` | tekst | Data/czas wpisu |
+
+### Ostatnie poprawki
+
+- **Błąd usuwania/edycji** — `getSpecificUser` nie odejmuje już 1 od ID; edycja i usuwanie trafiają we właściwego użytkownika
+- **Kolizje ID** — nowe wpisy używają monotonicznego licznika `nextId` zamiast `list.length`, co zapobiega konfliktom po usunięciu
+- **Reset formularza** — pola imię/nazwisko/godziny czyszczą się po zapisu i po zamknięciu formularza bez zapisu
+- **Formuły w Excelu** — godziny i minuty są eksportowane jako osobne kolumny liczbowe, umożliwiając bezpośrednie tworzenie formuł
 
 ### Autor
 

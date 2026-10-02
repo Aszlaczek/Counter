@@ -41,6 +41,7 @@ export const useHoursStore = create<HoursStoreSchema>((set, get) => ({
 
 type UserListSchema = {
   list: User[];
+  nextId: number;
   addToList: (user: User) => void;
   removeUser: (id: number) => void;
   getSpecificUser: (id: number) => User | undefined;
@@ -49,11 +50,18 @@ type UserListSchema = {
 
 export const useUserListStore = create<UserListSchema>((set, get) => ({
   list: [],
-  addToList: (user) => set({ list: [...get().list, user] }),
+  nextId: 0,
+  addToList: (user) => {
+    const id = get().nextId;
+    set({
+      list: [...get().list, { ...user, id }],
+      nextId: id + 1,
+    });
+  },
   removeUser: (id) =>
     set({ list: [...get().list.filter((user) => user.id !== id)] }),
   getSpecificUser: (id) => {
-    return get().list.find((user) => user.id === id - 1);
+    return get().list.find((user) => user.id === id);
   },
   setSpecificUser: (id, user) =>
     set({ list: get().list.map((e) => (e.id === id ? (e = user) : e)) }),

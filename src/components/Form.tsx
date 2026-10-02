@@ -1,4 +1,4 @@
-import { useEffect, type FormEvent } from 'react'
+import { useEffect, useRef, type FormEvent } from 'react'
 import type { User } from '../type'
 import { useHoursStore, usePopUpStore, useStateStore, useUserListStore, useUserStore } from '../store'
 import '../style/Form.css';
@@ -7,11 +7,14 @@ const Form = ({ isClosing }: { isClosing?: boolean }) => {
     const { user, editUser, removeInfo } = useUserStore()
     const { isDone, setStateFalse, setStateTrue } = useStateStore()
     const { allHours, setMin } = useHoursStore()
-    const { addToList, list } = useUserListStore()
+    const { addToList } = useUserListStore()
     const { visible } = usePopUpStore()
+    const skipHoursSync = useRef(false)
 
     useEffect(() => {
-        editUser('hours', allHours)
+        if (!skipHoursSync.current) {
+            editUser('hours', allHours)
+        }
     }, [allHours, editUser])
 
     const saveUser = (e: FormEvent<HTMLFormElement>) => {
@@ -20,20 +23,22 @@ const Form = ({ isClosing }: { isClosing?: boolean }) => {
 
         const data = new FormData(e.currentTarget)
         const [name, surname, hours] = [data.get('name'), data.get('surname'), data.get('hours')]
-        const newUser: User = { 
-            id: list.length, 
-            name: name as string, 
-            surname: surname as string, 
-            hours: hours as string, 
-            date: new Date().toLocaleString() 
+        const newUser: User = {
+            id: null,
+            name: name as string,
+            surname: surname as string,
+            hours: hours as string,
+            date: new Date().toLocaleString()
         }
 
         addToList(newUser)
         removeInfo()
         setMin(0)
+        skipHoursSync.current = true
 
         setTimeout(() => {
             setStateTrue()
+            skipHoursSync.current = false
         }, 800)
     }
 

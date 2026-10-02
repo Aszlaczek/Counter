@@ -3,13 +3,14 @@ import Counter from "./components/Counter";
 import { useState } from "react";
 import Form from "./components/Form";
 import Table from "./components/Table";
-import { usePopUpStore } from "./store";
+import { usePopUpStore, useUserStore } from "./store";
 import EditForm from "./components/EditForm";
 
 export default function App() {
   const [showForm, setShowLabel] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const { visible } = usePopUpStore();
+  const { removeInfo } = useUserStore();
 
   const handleToggleForm = () => {
     if (showForm) {
@@ -17,6 +18,7 @@ export default function App() {
       setTimeout(() => {
         setShowLabel(false);
         setIsExiting(false);
+        removeInfo();
       }, 300); // Match the CSS transition duration
     } else {
       setShowLabel(true);

@@ -10,18 +10,24 @@ const EditForm = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (user.id === null) {
+            alert("Błąd: Nie znaleziono użytkownika")
+            return
+        }
+
         const data = new FormData(e.currentTarget)
         const [name, surname, hours] = [data.get('e-name'), data.get('e-surname'), data.get('e-hours')]
 
-        const editedUser: User = { 
-            id: user.id, 
-            name: name as string, 
-            surname: surname as string, 
-            hours: hours as string, 
-            date: new Date().toLocaleString() 
+        const editedUser: User = {
+            id: user.id,
+            name: name as string,
+            surname: surname as string,
+            hours: hours as string,
+            date: new Date().toLocaleString()
         }
 
-        setSpecificUser(user.id as number, editedUser)
+        setSpecificUser(user.id, editedUser)
         hide()
         removeInfo()
     }
