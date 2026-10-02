@@ -33,9 +33,16 @@ const EditForm = () => {
         removeInfo()
     }
 
-    const setChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const [name, value] = [e.target.name.split('-')[1], e.target.value]
-        editUser(name, value)
+    const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        editUser('name', e.target.value)
+    }
+
+    const handleSurnameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        editUser('surname', e.target.value)
+    }
+
+    const handleMinutesChange = (e: ChangeEvent<HTMLInputElement>) => {
+        editUser('minutes', Number(e.target.value))
     }
 
     const handleHide = () => {
@@ -50,15 +57,15 @@ const EditForm = () => {
                 <h3>Edytuj Dane</h3>
                 <label htmlFor="e-name">
                     <p>Imię</p>
-                    <input type="text" name="e-name" required id="e-name" value={user.name} onChange={e => setChange(e)} autoComplete="off" />
+                    <input type="text" name="e-name" required id="e-name" value={user.name} onChange={handleNameChange} autoComplete="off" />
                 </label>
                 <label htmlFor="e-surname">
                     <p>Nazwisko</p>
-                    <input type="text" name="e-surname" required id="e-surname" value={user.surname} onChange={e => setChange(e)} autoComplete="off" />
+                    <input type="text" name="e-surname" required id="e-surname" value={user.surname} onChange={handleSurnameChange} autoComplete="off" />
                 </label>
                 <label htmlFor="e-minutes">
                     <p>Minuty</p>
-                    <input type="number" name="e-minutes" required id="e-minutes" min={0} max={9999} step={1} inputMode="numeric" value={user.minutes} onChange={e => setChange(e)} autoComplete="off" />
+                    <input type="number" name="e-minutes" required id="e-minutes" min={0} max={9999} step={1} inputMode="numeric" value={user.minutes} onChange={handleMinutesChange} autoComplete="off" />
                     <p>= {formatMinutes(user.minutes)}</p>
                 </label>
                 <div className="container-btn">
